@@ -109,7 +109,7 @@ namespace FlatFileReader3._0.FileUploadClass
 
         //for Source and Target combined CSV files
 
-        public string Split_Source_Target_fromCSV(string file, string name)
+        public string Split_Source_Target_fromCSV(string file, string name, string tabletext, Char delimeter)
         {
             //Set up our variables
             string Feedback = string.Empty;
@@ -201,7 +201,8 @@ namespace FlatFileReader3._0.FileUploadClass
             sr.Dispose();
             try
             {
-                Feedback = ProcessBulkCopy(source_dt, name + "_source");
+                //Feedback = ProcessBulkCopy(source_dt, name + "_source");
+                createSourceTableAndData(source_dt, name + "_source", tabletext, delimeter);
             }
             catch(Exception err) { Feedback = err.Message; }
             try
@@ -324,7 +325,59 @@ namespace FlatFileReader3._0.FileUploadClass
             return sqlsc.Substring(0, sqlsc.Length - 1) + "\n)";
         }
 
+        public string createSourceTableAndData(DataTable dt, string filename, string tabletext, Char delimeter)
+        {
+            string Feedback = string.Empty;
+
+            try
+            {
+                List<int> MismatchedSrcArr = new List<int>();
+
+                DataTable source_dt = new DataTable();
+                DataRow source_row;
+
+                string[] lineArray;
+                lineArray = tabletext.Split(delimeter);
+
+                for(int i=0; i<lineArray.Length; i++)
+                {
+                    source_dt.Columns.Add(lineArray[i].ToString(), typeof(string));
+                }
+
+                string[] _source = new string[source_dt.Columns.Count];
+
+                for(int j=0; j< dt.Rows.Count; j++)
+                {
+                    source_row = source_dt.NewRow();
+                    string sourcerow = dt.Rows[j].ItemArray[0].ToString();
+
+                    lineArray = sourcerow.Split(',');
+
+                    _source = lineArray;
+                    try
+                    {
+                        source_row.ItemArray = _source;
+                        source_dt.Rows.Add(source_row);
+                    }catch(Exception ex)
+                    {
+                        Console.Write(ex.Message);
+                        MismatchedSrcArr.Add(j);
+                    }
+                }
+                Console.Write(MismatchedSrcArr.Count);
+                Feedback = ProcessBulkCopy(source_dt, filename);
+
+            }
+            catch(Exception ex)
+            {
+                Feedback = ex.Message;
+            }
+            return Feedback;
+
+        }
+
     }
 
+    
     
 }

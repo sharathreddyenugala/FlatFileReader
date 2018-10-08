@@ -51,7 +51,7 @@ namespace FlatFileReader3._0.Controllers
            return View();
         }
         [HttpPost]
-        public ActionResult sap(HttpPostedFileBase FileUpload)
+        public ActionResult sap(HttpPostedFileBase FileUpload, string tabletext, Char delimiter)
         {
             if (FileUpload.ContentLength > 0)
             {
@@ -69,7 +69,7 @@ namespace FlatFileReader3._0.Controllers
                         fileName = fileName.Substring(0, fileExtPos);
                     }
 
-                    TempData["Success"] = dataProcess.Split_Source_Target_fromCSV(path, fileName);
+                    TempData["Success"] = dataProcess.Split_Source_Target_fromCSV(path, fileName, tabletext, delimiter);
                     System.IO.File.Delete(path);
 
                 }
@@ -81,17 +81,8 @@ namespace FlatFileReader3._0.Controllers
 
             return View();
         }
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
+        
     }
 }

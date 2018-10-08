@@ -11,11 +11,17 @@
                     <h2>Source Target Combined File</h2>
                     <p>Please select the flat file which you want into extract.</p>
                 </div>
-
                 @using (Html.BeginForm("sap", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <input class="form-control" type="file" name="FileUpload" />
                     <br />
+                    <label>Table Columns</label>
+                    <input class="form-control" type="text" name="tabletext" />
+                    <br />
+                    <label>Delimiter</label>
+                    <input class="form-control" type="text" name="delimiter" />
+                    <br />
+
                     <br />
                     <br />
                     <input class="btn btn-custom btn-lg" type="submit" name="Submit" id="Submit" value="Upload" />
@@ -34,21 +40,7 @@
             </div>
         </div>
         
-        <div class="col-md-3 col-md-offset-1 contact-info">
-            <div class="contact-item">
-                <h4>Current Proceesing File</h4>
-                <p>
-                    <span>Address</span>4321 California St,<br>
-                    San Francisco, CA 12345
-                </p>
-            </div>
-            <div class="contact-item">
-                <p><span>Phone</span> +1 123 456 1234</p>
-            </div>
-            <div class="contact-item">
-                <p><span>Email</span> info@company.com</p>
-            </div>
-        </div>
+       
 
     </div>
 
