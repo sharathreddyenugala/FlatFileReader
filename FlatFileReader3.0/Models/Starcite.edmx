@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MedispendModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Medispend.dbo.STARCITE_20180313_Global_target' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="STARCITE_20180313_Global_target">
+          <Property Name="FileName" Type="nvarchar(max)" />
+          <Property Name="ProcessIndicator" Type="nvarchar(max)" />
+          <Property Name="SpendType" Type="nvarchar(max)" />
+          <Property Name="AttendeeType" Type="nvarchar(max)" />
+          <Property Name="CRLastName" Type="nvarchar(max)" />
+          <Property Name="CRFirstName" Type="nvarchar(max)" />
+          <Property Name="CRAddress1" Type="nvarchar(max)" />
+          <Property Name="CRCity" Type="nvarchar(max)" />
+          <Property Name="CRZip" Type="nvarchar(max)" />
+          <Property Name="CRCountry" Type="nvarchar(max)" />
+          <Property Name="CR_CID" Type="nvarchar(max)" />
+          <Property Name="DataSource" Type="nvarchar(max)" />
+          <Property Name="SpendExpenseOriginatorLastName" Type="nvarchar(max)" />
+          <Property Name="SpendExpenseOriginatorFirstName" Type="nvarchar(max)" />
+          <Property Name="SpendExpenseOriginatorEmailAddress" Type="nvarchar(max)" />
+          <Property Name="SpendExpenseOriginatorID" Type="nvarchar(max)" />
+          <Property Name="SpendOwner" Type="nvarchar(max)" />
+          <Property Name="SpendOrganizationGroup" Type="nvarchar(max)" />
+          <Property Name="SpendNP1" Type="nvarchar(max)" />
+          <Property Name="SpendNP2" Type="nvarchar(max)" />
+          <Property Name="SpendDate" Type="nvarchar(max)" />
+          <Property Name="SpendCurrency" Type="nvarchar(max)" />
+          <Property Name="SpendValue" Type="nvarchar(max)" />
+          <Property Name="TransactionIdentifier" Type="nvarchar(max)" />
+          <Property Name="EventName" Type="nvarchar(max)" />
+          <Property Name="EventID" Type="nvarchar(max)" />
+          <Property Name="EventType" Type="nvarchar(max)" />
+          <Property Name="EventVenue" Type="nvarchar(max)" />
+          <Property Name="EventStartDate" Type="nvarchar(max)" />
+          <Property Name="EventFinishDate" Type="nvarchar(max)" />
+          <Property Name="NumberOfAttendees" Type="nvarchar(max)" />
+          <Property Name="ProductName1" Type="nvarchar(max)" />
+          <Property Name="ChangeReason" Type="nvarchar(max)" />
+          <Property Name="ThirdPartyReceivingPaymentType" Type="nvarchar(max)" />
+          <Property Name="CustomExpenseTotalAmount" Type="nvarchar(max)" />
+          <Property Name="CustomSpendDescription" Type="nvarchar(max)" />
+          <Property Name="CustomSpendTotalCount" Type="nvarchar(max)" />
+          <Property Name="CustomEventCountry" Type="nvarchar(max)" />
+          <Property Name="CustomEventSubtype" Type="nvarchar(max)" />
+          <Property Name="CustomEventCurrency" Type="nvarchar(max)" />
+          <Property Name="CustomSpendThirdPartyVendorName" Type="nvarchar(max)" />
+          <Property Name="CustomSpendState" Type="nvarchar(max)" />
+          <Property Name="CustomExpenseDetailID" Type="nvarchar(max)" />
+          <Property Name="CustomVendorTypeCode" Type="nvarchar(max)" />
+          <Property Name="CustomVendorID" Type="nvarchar(max)" />
+          <Property Name="CustomCRConsumptionFlag" Type="nvarchar(max)" />
+          <Property Name="CustomVenueOrTravelType" Type="nvarchar(max)" />
+          <Property Name="CustomHCPNoShowFlag" Type="nvarchar(max)" />
+          <Property Name="CustomChangeReasonDescription" Type="nvarchar(max)" />
+          <Property Name="CustomPaymentMadeTo" Type="nvarchar(max)" />
+          <Property Name="CustomParticipantRole" Type="nvarchar(max)" />
+          <Property Name="CustomRecipientDeleteFlag" Type="nvarchar(max)" />
+          <Property Name="CustomExpenseDeleteFlag" Type="nvarchar(max)" />
+          <Property Name="CustomSourceBusinessUnit" Type="nvarchar(max)" />
+          <Property Name="CustomSourceActivity" Type="nvarchar(max)" />
+          <Property Name="CustomSourcePurpose" Type="nvarchar(max)" />
+          <Property Name="CustomSourceProduct" Type="nvarchar(max)" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Medispend.dbo.starcite_global_conf' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="starcite_global_conf">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fieldName" Type="varchar" MaxLength="250" />
+          <Property Name="isRequired" Type="int" />
+          <Property Name="actualValue" Type="varchar" MaxLength="250" />
+          <Property Name="isActive" Type="int" />
+          <Property Name="createdAt" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="MedispendModelStoreContainer">
+          <EntitySet Name="starcite_global_conf" EntityType="Self.starcite_global_conf" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [starcite_global_conf].[id] AS [id], 
+    [starcite_global_conf].[fieldName] AS [fieldName], 
+    [starcite_global_conf].[isRequired] AS [isRequired], 
+    [starcite_global_conf].[actualValue] AS [actualValue], 
+    [starcite_global_conf].[isActive] AS [isActive], 
+    [starcite_global_conf].[createdAt] AS [createdAt]
+    FROM [dbo].[starcite_global_conf] AS [starcite_global_conf]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MedispendModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="starcite_global_conf">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fieldName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="isRequired" Type="Int32" />
+          <Property Name="actualValue" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Int32" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="MedispendEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="starcite_global_conf" EntityType="Self.starcite_global_conf" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MedispendModelStoreContainer" CdmEntityContainer="MedispendEntities">
+          <EntitySetMapping Name="starcite_global_conf">
+            <EntityTypeMapping TypeName="MedispendModel.starcite_global_conf">
+              <MappingFragment StoreEntitySet="starcite_global_conf">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fieldName" ColumnName="fieldName" />
+                <ScalarProperty Name="isRequired" ColumnName="isRequired" />
+                <ScalarProperty Name="actualValue" ColumnName="actualValue" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -149,6 +157,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StarCiteController.cs" />
+    <Compile Include="Db\StarciteDb.cs" />
     <Compile Include="FileUploadClass\CreateTableShema.cs" />
     <Compile Include="FileUploadClass\Encoding.cs" />
     <Compile Include="FileUploadClass\SplitSourceDBTable.cs" />
@@ -157,6 +166,24 @@
     <Compile Include="FileUploadClass\SQLBulkCopy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Starcite.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Starcite.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Starcite.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Starcite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Starcite.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Starcite.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\starcite_global_conf.cs">
+      <DependentUpon>Starcite.tt</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -249,6 +276,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Starcite.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Starcite.edmx</DependentUpon>
+      <LastGenOutput>Starcite.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Starcite.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Starcite.edmx</DependentUpon>
+      <LastGenOutput>Starcite.cs</LastGenOutput>
+    </Content>
     <Content Include="obj\Debug\FlatFileReader3.0.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\FlatFileReader3.0.dll" />
     <Content Include="obj\Debug\FlatFileReader3.0.pdb" />
@@ -273,6 +310,13 @@
     <Content Include="obj\Debug\FlatFileReader3.0.csproj.CopyComplete" />
     <Content Include="obj\Debug\FlatFileReader3.0.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Debug\FlatFileReader3.0.csprojAssemblyReference.cache" />
+    <EntityDeploy Include="Models\Starcite.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Starcite.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Starcite.edmx.diagram">
+      <DependentUpon>Starcite.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -366,7 +410,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\" />
-    <Folder Include="Models\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
@@ -382,6 +425,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
