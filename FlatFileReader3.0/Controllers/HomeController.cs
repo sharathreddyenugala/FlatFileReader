@@ -120,6 +120,10 @@ namespace FlatFileReader3._0.Controllers
                             {
                                 for (int i = 0; i < StarCiteConfig.Count; i++)
                                 {
+                                    bool isFailed = false;
+                                    int num = j + 1;
+                                    string failedText = "Row Number " + num + " ";
+
                                     string fieldName = StarCiteConfig[i].fieldName;
                                     int isRequired = Convert.ToInt32(StarCiteConfig[i].isRequired);
                                     string actualValue = StarCiteConfig[i].actualValue;
@@ -128,26 +132,31 @@ namespace FlatFileReader3._0.Controllers
                                     if (isRequired == 1) {
                                         if (value == "" || value == null)
                                         {
-                                            int num = j + 1;
-                                            string failedText = "Row Number " + num + " " + fieldName + " failed, Value Required.";
-                                            FailedArr.Add(failedText);
-                                            break;
+                                            isFailed = true;
+                                            failedText +=   fieldName + " failed, Value Required.";
+                                            //FailedArr.Add(failedText);
+                                            //break;
                                         }
                                     }
                                     if (actualValue != "")
                                     {
                                         if (value != actualValue)
                                         {
-                                            int num = j + 1;
-                                            string failedText = "Row Number " + num + " " + fieldName + " failed, Value incorrect. Given-" + value + ", Correct is " + actualValue;
-                                            FailedArr.Add(failedText);
-                                            break;
+                                            isFailed = true;
+                                            failedText += fieldName + " failed, Value incorrect. Given-" + value + ", Correct is " + actualValue;
+                                            //FailedArr.Add(failedText);
+                                            //break;
                                         }
                                     }
-
+                                    if (isFailed == true)
+                                    {
+                                        isFailed = false;
+                                        FailedArr.Add(failedText);
+                                    }
                                 }
                             }
                         }
+
                         Console.Write(FailedArr);
                         if (FailedArr.Count == 0)
                         {
